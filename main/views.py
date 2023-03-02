@@ -8,7 +8,6 @@ from .models import Product, Category, Manufacturer
 
 
 class CRUDProduct(APIView):
-    @staticmethod
     def get(self, request, **kwargs):
         pk = kwargs.get('pk', None)
         if not pk:
@@ -20,14 +19,12 @@ class CRUDProduct(APIView):
                 return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.data)
 
-    @staticmethod
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
 
-    @staticmethod
     def put(self, request, pk):
         try:
             product = Product.objects.get(pk=pk)
@@ -40,7 +37,6 @@ class CRUDProduct(APIView):
 
         return Response(serializer.data)
 
-    @staticmethod
     def delete(self, request, pk):
         try:
             product = Product.objects.get(pk=pk)
@@ -51,7 +47,6 @@ class CRUDProduct(APIView):
 
 
 class CRUDManufacturer(APIView):
-    @staticmethod
     def get(self, request, **kwargs):
         pk = kwargs.get('pk', None)
 
@@ -64,14 +59,12 @@ class CRUDManufacturer(APIView):
                 return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.data)
 
-    @staticmethod
     def post(self, request):
         serializer = ManufacturerSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
 
-    @staticmethod
     def put(self, request, pk):
         try:
             product = Manufacturer.objects.get(pk=pk)
@@ -84,7 +77,6 @@ class CRUDManufacturer(APIView):
 
         return Response(serializer.data)
 
-    @staticmethod
     def delete(self, request, pk):
         try:
             product = Manufacturer.objects.get(pk=pk)
@@ -95,8 +87,7 @@ class CRUDManufacturer(APIView):
 
 
 class CRUDCategory(APIView):
-    @staticmethod
-    def get(request, **kwargs):
+    def get(self, request, **kwargs):
         pk = kwargs.get('pk', None)
         if not pk:
             serializer = CategorySerializer(CategorySerializer.objects.all(), many=True)
@@ -107,14 +98,12 @@ class CRUDCategory(APIView):
                 return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.data)
 
-    @staticmethod
     def post(self, request):
         serializer = CategorySerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
 
-    @staticmethod
     def put(self, request, pk):
         try:
             product = Category.objects.get(pk=pk)
@@ -127,7 +116,6 @@ class CRUDCategory(APIView):
 
         return Response(serializer.data)
 
-    @staticmethod
     def delete(self, request, pk):
         try:
             product = Category.objects.get(pk=pk)
